@@ -2,8 +2,8 @@ from flask import Flask, render_template, request
 import requests
 from datetime import datetime, timezone
 from dateutil import parser
-import isodate
-
+import isodate, os
+import json
 app = Flask(__name__)
 
 
@@ -17,8 +17,25 @@ def parse_duration(duration):
     
     return f"{minutes}:{seconds}"
 
+def save_to_json(data, filename="videos.json"):
+    # If file doesn't exist, create it and write initial data
+    if not os.path.isfile(filename):
+        with open(filename, 'w') as json_file:
+            json.dump(data, json_file, indent=4)
+        return
+
+    # Read existing data from file
+    with open(filename, 'r') as json_file:
+        existing_data = json.load(json_file)
+    
+    # Append new data
+    existing_data.extend(data)
+
+    # Write updated data back to file
+    with open(filename, 'w') as json_file:
+        json.dump(existing_data, json_file, indent=4)
 # Replace with your YouTube API key
-YOUTUBE_API_KEY = "AIzaSyCO8M4SLI9wAFwuz7O77ho3y2GBCl2gtaw"
+YOUTUBE_API_KEY = "AIzaSyDjYqKDb0CfwYiMrV0O4bm114EJOgi2tV0"
 
 @app.route('/')
 def index():
@@ -47,6 +64,7 @@ def index():
         # Filtering out Shorts (videos shorter than 60 seconds)
         if 'M' in duration or 'H' in duration:  # Check if the duration contains minutes (M) or hours (H)
             video_info = {
+                "query":search_query,
                 "title": video['snippet']['title'],
                 "thumbnail": video['snippet']['thumbnails']['high']['url'],
                 "channel_title": video['snippet']['channelTitle'],
@@ -64,6 +82,7 @@ def index():
             video_info["channel_image"] = channel_info['snippet']['thumbnails']['default']['url']
             
             video_data.append(video_info)
+            save_to_json(video_data)
 
             if len(video_data) >= 10:
                 break
