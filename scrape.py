@@ -87,7 +87,7 @@ def save_to_json(data, filename="videos.json"):
         json.dump(data, json_file, indent=4)
 
 # Example Usage
-API_KEY = 'AIzaSyDjYqKDb0CfwYiMrV0O4bm114EJOgi2tV0'
+API_KEY = ''
 search_query = 'Python programming tutorials'
 video_data_list = get_youtube_data(API_KEY, search_query)
 
