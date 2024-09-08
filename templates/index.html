@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,30 +8,204 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/067fc88846.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="/static/favicon.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 </head>
+
 <body>
-    
-    <form action="/" method="GET" class="w-full flex lg:flex-row flex-col items-center lg:px-8 lg:py-4 gap-3 p-4">
-        <div>
-            <img src="/static/logo.png" alt="logo" class="aspect-square lg:h-36 h-32">
+
+    <form action="/" method="GET" class="w-full grid grid-cols-10 items-center lg:px-8 lg:py-4 gap-3 p-4">
+        <div class="col-span-2">
+            <img src="/static/logo.png" alt="logo" class="aspect-square lg:h-36 h-16">
         </div>
-        <div class="flex gap-1 border rounded-full overflow-hidden">
-            <input type="text" name="q" placeholder="Search" class="px-6 py-3 focus:outline-none ">
-            <button type="submit" class="border-l px-4 hover:bg-gray-200"><i class="fa-solid fa-magnifying-glass "></i></button>    
+        <div class="col-span-6  gap-1 items-center border rounded-full overflow-hidden">
+            <div class="flex w-full">
+                <input type="text" name="q" placeholder="Search"
+                    class="w-[70%] lg:w-[80%] px-6 py-3 focus:outline-none ">
+                <button type="submit" class="w-[30%] lg:w-[20%] border-l px-4 hover:bg-gray-200">
+                    <i class="fa-solid fa-magnifying-glass "></i></button>
+            </div>
+
+        </div>
+        <div class="col-span-2 flex items-center justify-center">
+
+
+            <!-- Modal toggle -->
+            <button data-modal-target="default-modal" data-modal-toggle="default-modal"
+                class="block text-white bg-red-500 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                type="button">
+                <i class="fa-regular fa-pen-to-square"></i>
+            </button>
+
+            <!-- Main modal -->
+            <div id="default-modal" tabindex="-1" aria-hidden="true"
+                class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div class="relative p-4 w-full max-w-2xl max-h-full">
+                    <!-- Modal content -->
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <!-- Modal header -->
+                        <div
+                            class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                Edit
+                            </h3>
+                            <button type="button"
+                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                data-modal-hide="default-modal">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="p-4 md:p-5 space-y-4">
+
+
+                            <div class="flex gap-4 w-full items-center">
+
+                                <div class="w-[40%]">
+                                    <img id="in-prevu-thumbnail" class="aspect-video h-32 object-cover rounded-xl w-full"
+                                        alt="">
+                                        <input type="file" name="thumbnail-input" id="thumbnail-input" class="hidden" accept="image/*">
+                                        <button type="button" onclick="getThumbnail()" class="bg-gray-100 mt-2 px-4 py-2 rounded-lg"><i class="fa-solid fa-upload"></i> Upload</button>
+                                </div>
+                                <div class="w-[60%]">
+                                    <label for="title"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                                    <input type="text" id="title-input"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                                        placeholder="How to do a Backflip"  />
+                                    <div class=" w-full mt-2 ">
+                                        <label for="duration"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Duration</label>
+                                        <input type="text" id="duration-input"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                                            placeholder="00:00"  />
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="flex items-center gap-2 w-full">
+                                <div>
+                                    <img id="in-prevu-chanel-thumbnail" alt="" class="object-fit aspect-square h-16 rounded-full">
+
+                                    <input type="file" name="chanelImage" id="chanel-image-input" class="hidden" accept="image/*">
+                                    <button type="button" onclick="getChanelImage()" class="bg-gray-100 mt-2 px-4 py-2 rounded-lg"><i class="fa-solid fa-upload"></i> Upload</button>
+
+                                </div>
+
+                                <div class="w-[80%]">
+                                    <label for="chanelname"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Chanel
+                                        Name</label>
+                                    <input type="text" id="chanel-name-input"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                                        placeholder="Mr.Beast"  />
+                                </div>
+
+
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <div class=" w-full">
+                                    <label for="view"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Views</label>
+                                    <input type="text" id="views-input"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                                        placeholder="424"  />
+                                </div>
+
+                                <div class="w-full">
+                                    <label for="views"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select
+                                        Format</label>
+                                    <select id="views-format"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option>K</option>
+                                        <option>M</option>
+                                        <option>B</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class=" w-full">
+                                    <label for="published-at"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Published
+                                        At</label>
+                                    <input type="text" id="time-input"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-red-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+                                        placeholder="24"  />
+                                </div>
+
+                                <div class="w-full">
+                                    <label for="timeFormat"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select
+                                        Format</label>
+                                    <select id="time-format"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option>seconds ago</option>
+                                        <option>minutes ago</option>
+                                        <option>hours ago</option>
+                                        <option>days ago</option>
+                                        <option>monts ago</option>
+                                        <option>years ago</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal footer -->
+                        <div
+                            class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                            <button onclick="handlesubmit()" data-modal-hide="default-modal" type="button"
+                                class="text-white bg-red-500 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                                Save</button>
+                            <button data-modal-hide="default-modal" type="button"
+                                class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </form>
 
     <div class="grid lg:grid-cols-3 grid-cols-1 gap-3 lg:px-8 lg:py-4 p-4">
+        <div class="flex flex-col gap-3 mb-2 ">
+            <div class="relative aspect-video">
+                <a href="">
+                    <img id="prevu-thumbnail" class="aspect-video object-cover rounded-xl" alt="">
+                </a>
+                <p id="prevu-duration"
+                    class="absolute bottom-2 right-2 bg-black/50 font-semibold text-white text-sm rounded-md px-2"></p>
+            </div>
+            <div class="flex gap-4">
+                <img id="prevu-chanel-thumbnail" alt="" class=" aspect-square h-10 rounded-full">
+                <div class="flex flex-col gap-1">
+                    <p id="prevu-video-title" class="text-md leading-[24px] font-semibold text-black pr-4"></p>
+                    <p id="prevu-chanel-name" class="text-gray-400 font-semibold text-sm"></p>
+                    <p id="prevu-views-time" class="text-gray-500 font-semibold text-sm"></p>
+                </div>
+            </div>
+
+
+        </div>
         {% for video in videos %}
         <div class="flex flex-col gap-3 mb-2 ">
             <div class="relative aspect-video">
                 <a href="https://www.youtube.com/watch?v={{ video.video_id }}">
-                    <img class="aspect-video object-cover rounded-xl" src="{{ video.thumbnail }}" alt="{{ video.title }}">
+                    <img class="aspect-video object-cover rounded-xl" src="{{ video.thumbnail }}"
+                        alt="{{ video.title }}">
                 </a>
-                <p class="absolute bottom-2 right-2 bg-black/50 font-semibold text-white text-sm rounded-md px-2">{{ video.duration }}</p>
+                <p class="absolute bottom-2 right-2 bg-black/50 font-semibold text-white text-sm rounded-md px-2">{{
+                    video.duration }}</p>
             </div>
             <div class="flex gap-4">
-                <img src="{{ video.channel_image }}" alt="{{ video.channel_title }}" class=" aspect-square h-10 rounded-full">
+                <img src="{{ video.channel_image }}" alt="{{ video.channel_title }}"
+                    class=" aspect-square h-10 rounded-full">
                 <div class="flex flex-col gap-1">
                     <p class="text-md leading-[24px] font-semibold text-black pr-4">{{ video.title}}</p>
                     <p class="text-gray-400 font-semibold text-sm">{{ video.channel_title }}</p>
@@ -40,8 +215,99 @@
 
 
         </div>
-        
+
         {% endfor %}
     </div>
+
+    <script>
+        const thumbnail = document.getElementById('prevu-thumbnail')
+        const duration = document.getElementById('prevu-duration')
+        const videoTitle = document.getElementById('prevu-video-title')
+        const chanelImage = document.getElementById('prevu-chanel-thumbnail')
+        const chanelName = document.getElementById('prevu-chanel-name')
+        const viewsTime = document.getElementById('prevu-views-time')
+
+        const modalthumbnail = document.getElementById('in-prevu-thumbnail')
+        const modalchanelImage = document.getElementById('in-prevu-chanel-thumbnail')
+
+
+        thumbnail.src = "/static/video-thumbnail.png"
+        chanelImage.src = "/static/user-avater.jpg"
+        modalthumbnail.src = "/static/video-thumbnail.png"
+        modalchanelImage.src = "/static/user-avater.jpg"
+        duration.textContent = "00:00:00"
+        videoTitle.textContent = "Video Title"
+        chanelName.textContent = "Channel Name"
+        viewsTime.textContent = "0 views . 12 Years Ago"
+
+        function handlesubmit() {
+            const durationIn = document.getElementById('duration-input').value
+            const chanelNameIn = document.getElementById('chanel-name-input').value
+            const videoTitleIn = document.getElementById('title-input').value
+            const viewsIn = document.getElementById('views-input').value
+            const viewsFormatIn = document.getElementById('views-format').value
+            const timeIn = document.getElementById('time-input').value
+            const timeFormatIn = document.getElementById('time-format').value
+
+
+            const chanelImageIn = document.getElementById('prevu-chanel-thumbnail')
+            const thumbnailIn = document.getElementById('title-input')
+            
+
+            videoTitle.textContent = videoTitleIn
+            chanelName.textContent = chanelNameIn
+            duration.textContent = durationIn
+            viewsTime.textContent = viewsIn + viewsFormatIn + " . " + timeIn + " " + timeFormatIn
+
+
+
+        }
+
+        function getThumbnail(){
+            document.getElementById('thumbnail-input').click()
+        }
+        document.getElementById('thumbnail-input').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const imageUrl = URL.createObjectURL(file);
+                
+                // Set the image source to the created URL
+                thumbnail.src = imageUrl;
+                modalthumbnail.src = imageUrl;
+  
+                // Optionally, you can revoke the object URL after the image is loaded
+                thumbnail.onload = function() {
+                    URL.revokeObjectURL(thumbnail.src);
+                }
+                modalthumbnail.onload = function() {
+                    URL.revokeObjectURL(modalthumbnail.src);
+                }
+
+            }
+        });
+        function getChanelImage(){
+            document.getElementById('chanel-image-input').click()
+        }
+        document.getElementById('chanel-image-input').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const imageUrl = URL.createObjectURL(file);
+                
+                // Set the image source to the created URL
+                chanelImage.src = imageUrl;
+                modalchanelImage.src = imageUrl;
+                
+                // Optionally, you can revoke the object URL after the image is loaded
+                chanelImage.onload = function() {
+                    URL.revokeObjectURL(chanelImage.src);
+            }
+            modalchanelImage.onload = function() {
+                    URL.revokeObjectURL(modalchanelImage.src);
+            }
+        }
+        });
+       
+    </script>
 </body>
+
 </html>
